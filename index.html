@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional portfolio showcasing current and future projects">
+    <title>Lwaano Siakalima | Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    
+
+    <section id="home" class="hero">
+        <div id="particles-js"></div>
+        <div class="hero-content">
+            <h1>Lwaano Siakalima</h1>
+            <p>Web Developer, Software Engineer & Creative Designer</p>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <h2>Technical Skills</h2>
+        <div class="skills-bars">
+            <div class="skill" data-level="90">
+                <span>HTML/CSS/JavaScript</span>
+                <div class="bar-container"></div>
+                    <div class="bar"></div>
+            </div>
+            <div class="skill" data-level="90">
+                <span>Php/Laravel</span>
+                <div class="bar-container"></div>
+                    <div class="bar"></div>
+            </div>
+            <div class="skill" data-level="90">
+                <span>Python/Django</span>
+                <div class="bar-container"></div>
+                    <div class="bar"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <h2>My Projects</h2>
+        <div class="filter-buttons">
+            <button class="active" data-filter="all">All</button>
+            <button class="current" data-filter="all">Current</button>
+            <button class="future" data-filter="all">Future</button>
+        </div>
+        <div class="projects-grid"></div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Get in Touch</h2>
+        <form action="https://formspree.io/f/your-form-id" method="POST">
+            <div class="form-group">
+                <input type="text" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <textarea name="message" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+        </form>
+
+        <div class="contact-content">
+            <p>Email: Siakalimalwaano@gmail.com</p>
+            <div class="social-links">
+                <a href="https://github.com/Lwaano" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/lwaano-siakalima-917318225?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank"></a>
+            </div>
+        </div>
+    </section>
+<!-- loading spinner-->
+ <div class="loader"></div>
+    <footer>
+        <p>&copy; 2025 Lwaano Siakalima. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    
+</body>
+</html>

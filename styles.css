@@ -1,0 +1,174 @@
+:root {
+    --cyan: #00ffff;
+    --lilac: #c8a2c8;
+    --dark: #2d2d2d;
+    --light: #f4f4f4;
+}
+
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #f4f4f4;
+    --nav-bg: #121212;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    background: var(--light);
+    color: var(--dark);
+}
+
+header {
+    background: var(--dark);
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+nav a {
+    color: var(--cyan);
+    text-decoration: none;
+    padding: 1rem;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--lilac);
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, var(--cyan), var(--lilac));
+    text-align: center;
+    padding-top: 60px;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.project-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0);
+    transition: transform 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.filter-buttons {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+button {
+    padding: 0.8rem 1.5rem;
+    margin: 0 0.5rem;
+    border: none;
+    border-radius: 5px;
+    background: var(--cyan);
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button.active, button:hover {
+    background: var(--lilac);
+}
+
+
+.skill-bars {
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+.bar-container {
+    background: rgba(0,0,0,0.1);
+    height: 10px;
+    border-radius: 5px;
+}
+
+.bar {
+    height: 100%;
+    background: var(--cyan);
+    width: 0;
+    transition: width 1s ease-in-out;
+    border-radius: 5px;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid var(--lilac);
+    border-radius: 5px;
+    background: var(--bg-color);
+    color: var(--text-color); 
+}
+
+.loader {
+    border: 5px solid var(--lilac);
+    border-top: 5px solid var(--cyan);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
