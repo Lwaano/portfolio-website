@@ -1,99 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Professional portfolio showcasing current and future projects">
-    <title>Lwaano Siakalima | Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.css">
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lwaano Siakalima | Portfolio</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header class="glass-nav">
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    
+  <section id="home" class="hero">
+    <div id="particles-js"></div>
+    <div class="hero-content">
+      <h1 class="gradient-text">Lwaano Siakalima's Portfolio Website</h1>
+      <div class="title-container">
+        <p class="profession-titles">
+          <span class="title-item">Web Developer</span>
+          <span class="title-item">Software Engineer</span>
+          <span class="title-item">Creative Designer</span>
+        </p>
+      </div>
+    </div>
+  </section>
 
-    <section id="home" class="hero">
-        <div id="particles-js"></div>
-        <div class="hero-content">
-            <h1>Lwaano Siakalima</h1>
-            <p>Web Developer, Software Engineer & Creative Designer</p>
+  <section id="skills" class="skills">
+    <h2>Technical Skills</h2>
+    <div class="skills-bars">
+      <div class="skill" data-level="90">
+        <span>Web and Application Development</span>
+        <div class="bar-container">
+          <div class="bar"></div>
         </div>
-    </section>
-
-    <section id="skills" class="skills">
-        <h2>Technical Skills</h2>
-        <div class="skills-bars">
-            <div class="skill" data-level="90">
-                <span>HTML/CSS/JavaScript</span>
-                <div class="bar-container"></div>
-                    <div class="bar"></div>
-            </div>
-            <div class="skill" data-level="90">
-                <span>Php/Laravel</span>
-                <div class="bar-container"></div>
-                    <div class="bar"></div>
-            </div>
-            <div class="skill" data-level="90">
-                <span>Python/Django</span>
-                <div class="bar-container"></div>
-                    <div class="bar"></div>
-            </div>
-
+      </div>
+      <div class="skill" data-level="90">
+        <span>Network Administration</span>
+        <div class="bar-container">
+          <div class="bar"></div>
         </div>
-    </section>
-
-    <section id="projects" class="projects">
-        <h2>My Projects</h2>
-        <div class="filter-buttons">
-            <button class="active" data-filter="all">All</button>
-            <button class="current" data-filter="all">Current</button>
-            <button class="future" data-filter="all">Future</button>
+      </div>
+      <div class="skill" data-level="90">
+        <span>Database Management</span>
+        <div class="bar-container">
+          <div class="bar"></div>
         </div>
-        <div class="projects-grid"></div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <section id="contact" class="contact">
-        <h2>Get in Touch</h2>
-        <form action="https://formspree.io/f/your-form-id" method="POST">
-            <div class="form-group">
-                <input type="text" name="name" placeholder="Your Name" required>
-            </div>
-            <div class="form-group">
-                <input type="email" name="email" placeholder="Your Email" required>
-            </div>
-            <div class="form-group">
-                <textarea name="message" placeholder="Your Message" required></textarea>
-            </div>
-            <button type="submit">Send Message</button>
-        </form>
-
-        <div class="contact-content">
-            <p>Email: Siakalimalwaano@gmail.com</p>
-            <div class="social-links">
-                <a href="https://github.com/Lwaano" target="_blank">GitHub</a>
-                <a href="https://www.linkedin.com/in/lwaano-siakalima-917318225?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank"></a>
-            </div>
+  <section id="projects" class="projects">
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="projects-grid">
+      <!-- Weather Dashboard -->
+      <div class="glass-card project-card">
+        <div class="project-content">
+          <h3>Weather Dashboard</h3>
+          <div class="project-tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">API</span>
+            <span class="tag">Bootstrap</span>
+          </div>
+          <p class="project-description">
+            Interactive weather forecasting web application with real-time data from OpenWeather API and search history features.
+          </p>
+          <div class="project-links">
+            <a href="https://github.com/Lwaano/weather_dashboard" class="btn-neon" target="_blank">View Code</a>
+          </div>
         </div>
-    </section>
-<!-- loading spinner-->
- <div class="loader"></div>
-    <footer>
-        <p>&copy; 2025 Lwaano Siakalima. All rights reserved.</p>
-    </footer>
-
-    <script src="script.js"></script>
-    
+      </div>
+  
+      <!-- CNMAT Admin System -->
+      <div class="glass-card project-card">
+        <div class="project-content">
+          <h3>CNMAT Admin System</h3>
+          <div class="project-tags">
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">MongoDB</span>
+          </div>
+          <p class="project-description">
+            Comprehensive administration dashboard with user management, analytics, and system configuration capabilities.
+          </p>
+          <div class="project-links">
+            <a href="https://github.com/Lwaano/CNMAT-Admin" class="btn-neon" target="_blank">View Code</a>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Accommodation System -->
+      <div class="glass-card project-card">
+        <div class="project-content">
+          <h3>Accommodation System</h3>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Django</span>
+            <span class="tag">PostgreSQL</span>
+          </div>
+          <p class="project-description">
+            Full-stack accommodation management system with booking features, payment integration, and inventory management.
+          </p>
+          <div class="project-links">
+            <a href="https://github.com/Lwaano/accommodation_system" class="btn-neon" target="_blank">View Code</a>
+          </div>
+        </div>
+      </div>
+  
+      <!-- CSV Processor -->
+      <div class="glass-card project-card">
+        <div class="project-content">
+          <h3>CSV Data Processor</h3>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">Data Analysis</span>
+          </div>
+          <p class="project-description">
+            Advanced CSV data processing tool with cleaning, transformation, and visualization capabilities for large datasets.
+          </p>
+          <div class="project-links">
+            <a href="https://github.com/Lwaano/csv-project" class="btn-neon" target="_blank">View Code</a>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Starter Project Template -->
+      <div class="glass-card project-card">
+        <div class="project-content">
+          <h3>Project Starter Template</h3>
+          <div class="project-tags">
+            <span class="tag">Boilerplate</span>
+            <span class="tag">Webpack</span>
+            <span class="tag">CI/CD</span>
+          </div>
+          <p class="project-description">
+            Modern project scaffolding with pre-configured build tools, testing frameworks, and deployment pipelines.
+          </p>
+          <div class="project-links">
+            <a href="https://github.com/Lwaano/01-starting-project" class="btn-neon" target="_blank">View Code</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="contact" class="contact">
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="contact-container glass-card">
+      <form class="contact-form">
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <div class="underline"></div>
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Your Email" required>
+          <div class="underline"></div>
+        </div>
+        <div class="form-group">
+          <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+          <div class="underline"></div>
+        </div>
+        <button type="submit" class="btn-neon">Send Message</button>
+      </form>
+    </div>
+    <div class="contact-content">
+      <p>Email: Siakalimalwaano@gmail.com</p>
+      <div class="social-links">
+        <a href="https://github.com/Lwaano" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/lwaano-siakalima-917318225" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+  
+  <div class="social-links">
+    <a href="https://github.com/Lwaano" class="social-icon" target="_blank">
+      <i class="fab fa-github"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/lwaano-siakalima-917318225" class="social-icon" target="_blank">
+      <i class="fab fa-linkedin"></i>
+    </a>
+    <a href="https://twitter.com/LwaanoS" class="social-icon" target="_blank">
+      <i class="fab fa-twitter"></i>
+    </a>
+  </div>
+  
+  <div class="loader" style="display: none;"></div>
+  
+  <footer>
+    <p>&copy; 2025 Lwaano Siakalima. All rights reserved.</p>
+  </footer>
+  
+  <script src="script.js"></script>
 </body>
 </html>

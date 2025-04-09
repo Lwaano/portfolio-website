@@ -1,41 +1,47 @@
-document.addEventListener('DOMContentLoaded'), () => {
+document.addEventListener('DOMContentLoaded', () => {
     const projects = [
         {
             title: "Clinical Nursing Mobile Application Tool Admin Dashboard",
-            description: "This is a description of Clinical Nursing Mobile Application Tool Admin Dashboard",
-            status: "In Progress",
-            image: "projects/projects.jpg",
-            link: "https://github.com/Lwaano/CNMAT-Admin"
+            description: "A full-stack Clinical Nursing Mobile Application Tool Admin Dashboard with real-time user management.",
+            status: "current",
+            image: "projects/project1.jpg",
+            link: "https://github.com/Lwaano/CNMAT-Admin",
+            tags: ["Php", "Laravel", "SQLite"]
         },
         {
             title: "Project 2",
-            description: "This is a description of Project 2",
-            status: "In Progress",
-            image: "projects/projects2.jpg",
-            link: "https://github.com/Lwaano/Project-2"
-        },
+            description: "Description of Project 2",
+            status: "future",
+            image: "projects/project2.jpg",
+            link: "https://github.com/Lwaano/Project-2",
+            tags: ["React", "Node.js"]
+        }
     ];
 
     const projectsGrid = document.querySelector('.projects-grid');
-    const filterButtons = document.querySelectorAll('filter-buttons button');
+    const filterButtons = document.querySelectorAll('.filter-buttons button');
 
     function displayProjects(filter = 'all') {
         projectsGrid.innerHTML = '';
-        const filterProjects = filter == 'all'
+        const filteredProjects = filter === 'all'
             ? projects
-            : projects.filter(project => project.status == filter);
+            : projects.filter(project => project.status === filter);
 
-        filterProjects.forEach(project => {
+        filteredProjects.forEach(project => {
             const projectCard = document.createElement('div');
-            projectCard.className = 'project-card';
+            projectCard.className = 'glass-card project-card';
             projectCard.innerHTML = `
-                <img src="${project.image}" alt="${project.title}">
-                <div class="project-info">
+                <img src="${project.image}" alt="${project.title}" class="project-image">
+                <div class="project-content">
                     <h3>${project.title}</h3>
-                    <p>${project.description}</p>
-                    <span class="status ${project.status}">${project.status}</span>
-                    <a href="${project.link}" target="_blank" class="view-project">View Project</a>
-
+                    <div class="project-tags">
+                        ${project.tags ? project.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : ''}
+                    </div>
+                    <p class="project-description">${project.description}</p>
+                    <div class="project-links">
+                        <a href="${project.link}" class="btn-neon">Live Demo</a>
+                        <a href="${project.link}" class="btn-neon btn-ghost">Code</a>
+                    </div>
                 </div>
             `;
             projectsGrid.appendChild(projectCard);
@@ -44,13 +50,12 @@ document.addEventListener('DOMContentLoaded'), () => {
 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
-            filterButtons.forEach('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
             const filter = button.dataset.filter;
             displayProjects(filter);
-            });
+        });
     });
-
 
     // Theme Toggle
     const themeToggle = document.createElement('button');
@@ -59,14 +64,15 @@ document.addEventListener('DOMContentLoaded'), () => {
     document.querySelector('nav ul').appendChild(themeToggle);
 
     themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        document.body.setAttribute('data-theme'),
+        document.body.classList.toggle('dark-theme');
+        document.body.setAttribute('data-theme', 
             document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+        localStorage.setItem('theme', document.body.getAttribute('data-theme'));
     });
 
     // Smooth Scroll
-    document.querySelectorAll('a [href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault();
             document.querySelector(this.getAttribute('href')).scrollIntoView({
                 behavior: 'smooth'
@@ -81,32 +87,31 @@ document.addEventListener('DOMContentLoaded'), () => {
 
     // Initialize Particles
     particlesJS('particles-js', {
-        "particles": {
+        particles: {
             number: { value: 80 },
-            color: { value: '#00ffff' },
-            shape: { type: 'circle', 
+            color: { value: "#00ffff" },
+            shape: { type: "circle" },
             opacity: { value: 0.5 },
             size: { value: 5 },
             move: {
                 enable: true,
                 speed: 2,
-                direction: 'none',
+                direction: "none",
                 random: false,
                 straight: false,
-                out_mode: 'out',
-                bounce: false,
+                out_mode: "out",
+                bounce: false
             }
         },
-        "interactivity": {
-            detect_on: 'canvas',
+        interactivity: {
+            detect_on: "canvas",
             events: {
-                onhover: { enable: true, mode: 'repulse' },
-                onclick: { enable: true, mode: 'push' },
+                onhover: { enable: true, mode: "repulse" },
+                onclick: { enable: true, mode: "push" },
                 resize: true
             }
         }
     });
-
 
     // Animate Skill Bar
     const animateSkills = () => {
@@ -117,11 +122,27 @@ document.addEventListener('DOMContentLoaded'), () => {
         });
     };
 
+    // Animate skill bars on scroll
+const skillBars = document.querySelectorAll('.skill-progress');
+const skillsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting) {
+            entry.target.style.width = entry.target.dataset.width;
+        }
+    });
+}, { threshold: 0.5 });
+
+skillBars.forEach(bar => {
+    bar.dataset.width = bar.style.width;
+    bar.style.width = '0';
+    skillsObserver.observe(bar.parentElement);
+});
+
     // Intersection Observer for animations
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                if (entry.target.classList.contains('skill-bars')) {
+                if (entry.target.classList.contains('skills-bars')) {
                     animateSkills();
                 }
                 entry.target.classList.add('visible');
@@ -129,19 +150,32 @@ document.addEventListener('DOMContentLoaded'), () => {
         });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.skill-bars, .project-card').forEach(el => {
+    document.querySelectorAll('.skills-bars, .project-card').forEach(el => {
         observer.observe(el);
     });
 
-    //Theme to local storage
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark-mode');
+    // Initialize theme
+    const savedTheme = localStorage.getItem('theme') || 
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.body.setAttribute('data-theme', savedTheme);
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
     }
 
-    // Initialize theme
-document.body.setAttribute('data-theme', 
-    document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+    // Add intersection observer for scroll-based animations
+const heroContent = document.querySelector('.name-title-wrapper');
 
-    //Initial display
+const heroObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+        }
+    });
+}, { threshold: 0.5 });
+
+heroObserver.observe(heroContent);
+
+
+    // Initial display
     displayProjects();
-};
+});
