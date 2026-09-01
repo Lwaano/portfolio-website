@@ -98,40 +98,99 @@
   </section>
 
   <section id="github" class="github-activity">
-    <h2 class="section-title">GitHub Activity</h2>
-    <p class="section-subtitle">Live stats, pulled straight from my GitHub profile.</p>
-    <div class="github-badges">
-      <img loading="lazy" src="https://img.shields.io/github/followers/Lwaano?label=Followers&style=for-the-badge&color=6BFFF7&labelColor=1a1a1a" alt="GitHub followers">
-      <img loading="lazy" src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/Lwaano&query=public_repos&label=Public%20Repos&style=for-the-badge&color=FF3FA4&labelColor=1a1a1a" alt="Public repositories">
-      <a href="https://github.com/Lwaano" target="_blank" rel="noopener">
-        <img loading="lazy" src="https://img.shields.io/badge/View%20Full%20Profile-GitHub-D68FD6?style=for-the-badge&logo=github&labelColor=1a1a1a" alt="View full GitHub profile">
-      </a>
+    <h2 class="section-title">What I'm Building</h2>
+    <p class="section-subtitle">A quick look at what I'm focused on right now, plus my latest work straight from GitHub.</p>
+
+    <div class="now-panel glass-card">
+      <span class="now-badge"><span class="now-dot"></span> Now</span>
+      <p>
+        Currently building the <strong>Church Registration System</strong> — a member management platform for
+        churches — while sharpening my skills in <strong>data analysis</strong> and <strong>IT support</strong>.
+      </p>
     </div>
-    <div class="github-grid">
-      <img class="github-card github-streak" loading="lazy" src="https://streak-stats.demolab.com/?user=Lwaano&theme=radical&background=00000000&hide_border=true&ring=FF3FA4&fire=6BFFF7&currStreakLabel=6BFFF7" alt="Lwaano Siakalima's GitHub contribution streak">
+
+    <div class="repo-feed" id="repoFeed">
+      <p class="repo-feed-status" id="repoFeedStatus">Loading recent repositories…</p>
     </div>
   </section>
 
   <section id="skills" class="skills">
     <h2 class="section-title">Technical Skills</h2>
-    <div class="skills-bars">
-      <div class="skill" data-level="90">
-        <span><i class="fa-solid fa-code"></i> Web and Application Development</span>
-        <div class="bar-container">
-          <div class="bar"></div>
+    <p class="section-subtitle">Hover a card to see it come to life.</p>
+    <div class="skills-grid">
+      <div class="skill-card glass-card" data-level="90">
+        <div class="skill-ring">
+          <svg viewBox="0 0 120 120">
+            <circle class="skill-ring-bg" cx="60" cy="60" r="52"></circle>
+            <circle class="skill-ring-fill" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="skill-ring-content">
+            <i class="fa-solid fa-code"></i>
+            <span class="skill-percent">0%</span>
+          </div>
         </div>
+        <h3>Web &amp; App Development</h3>
+        <p>Building responsive, full-stack web apps from front to back.</p>
       </div>
-      <div class="skill" data-level="90">
-        <span><i class="fa-solid fa-network-wired"></i> Network Administration</span>
-        <div class="bar-container">
-          <div class="bar"></div>
+
+      <div class="skill-card glass-card" data-level="90">
+        <div class="skill-ring">
+          <svg viewBox="0 0 120 120">
+            <circle class="skill-ring-bg" cx="60" cy="60" r="52"></circle>
+            <circle class="skill-ring-fill" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="skill-ring-content">
+            <i class="fa-solid fa-network-wired"></i>
+            <span class="skill-percent">0%</span>
+          </div>
         </div>
+        <h3>Network Administration</h3>
+        <p>Configuring, securing, and maintaining reliable networks.</p>
       </div>
-      <div class="skill" data-level="90">
-        <span><i class="fa-solid fa-database"></i> Database Management</span>
-        <div class="bar-container">
-          <div class="bar"></div>
+
+      <div class="skill-card glass-card" data-level="90">
+        <div class="skill-ring">
+          <svg viewBox="0 0 120 120">
+            <circle class="skill-ring-bg" cx="60" cy="60" r="52"></circle>
+            <circle class="skill-ring-fill" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="skill-ring-content">
+            <i class="fa-solid fa-database"></i>
+            <span class="skill-percent">0%</span>
+          </div>
         </div>
+        <h3>Database Management</h3>
+        <p>Designing and optimizing relational &amp; NoSQL data stores.</p>
+      </div>
+
+      <div class="skill-card glass-card" data-level="90">
+        <div class="skill-ring">
+          <svg viewBox="0 0 120 120">
+            <circle class="skill-ring-bg" cx="60" cy="60" r="52"></circle>
+            <circle class="skill-ring-fill" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="skill-ring-content">
+            <i class="fa-solid fa-headset"></i>
+            <span class="skill-percent">0%</span>
+          </div>
+        </div>
+        <h3>IT Support</h3>
+        <p>Diagnosing issues and keeping systems running smoothly.</p>
+      </div>
+
+      <div class="skill-card glass-card" data-level="90">
+        <div class="skill-ring">
+          <svg viewBox="0 0 120 120">
+            <circle class="skill-ring-bg" cx="60" cy="60" r="52"></circle>
+            <circle class="skill-ring-fill" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="skill-ring-content">
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="skill-percent">0%</span>
+          </div>
+        </div>
+        <h3>Data Analysis</h3>
+        <p>Turning raw data into clear, actionable insights.</p>
       </div>
     </div>
   </section>

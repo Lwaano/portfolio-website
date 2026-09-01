@@ -4,6 +4,88 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  /* ---------- Live GitHub repo feed (fetched directly, no third-party badge service) ---------- */
+  const LANGUAGE_COLORS = {
+    JavaScript: '#f1e05a',
+    TypeScript: '#3178c6',
+    Python: '#3572A5',
+    PHP: '#4F5D95',
+    HTML: '#e34c26',
+    CSS: '#563d7c',
+    Java: '#b07219',
+    'C++': '#f34b7d',
+    C: '#555555',
+    'C#': '#178600',
+    Ruby: '#701516',
+    Go: '#00ADD8',
+    Shell: '#89e051',
+  };
+
+  async function loadRepoFeed() {
+    const feedEl = document.getElementById('repoFeed');
+    const statusEl = document.getElementById('repoFeedStatus');
+    const CACHE_KEY = 'gh_repo_feed_v1';
+
+    function render(repos) {
+      feedEl.innerHTML = '';
+      repos.forEach(repo => {
+        const card = document.createElement('a');
+        card.className = 'glass-card repo-card';
+        card.href = repo.html_url;
+        card.target = '_blank';
+        card.rel = 'noopener';
+
+        const langColor = LANGUAGE_COLORS[repo.language] || 'var(--primary)';
+        const langHtml = repo.language
+          ? `<span class="repo-lang"><span class="repo-lang-dot" style="background:${langColor}"></span>${repo.language}</span>`
+          : '';
+
+        card.innerHTML = `
+          <span class="repo-card-name"><i class="fa-solid fa-code-branch"></i>${repo.name}</span>
+          <p class="repo-card-desc">${repo.description || 'No description provided.'}</p>
+          <div class="repo-card-meta">
+            ${langHtml}
+            <span><i class="fa-solid fa-star"></i> ${repo.stargazers_count}</span>
+            <span>Updated ${new Date(repo.pushed_at).toLocaleDateString(undefined, { month: 'short', year: 'numeric' })}</span>
+          </div>
+        `;
+        feedEl.appendChild(card);
+      });
+    }
+
+    try {
+      const cached = sessionStorage.getItem(CACHE_KEY);
+      if (cached) {
+        render(JSON.parse(cached));
+        return;
+      }
+
+      const response = await fetch('https://api.github.com/users/Lwaano/repos?sort=pushed&per_page=10');
+      if (!response.ok) throw new Error(`GitHub API responded ${response.status}`);
+      const repos = (await response.json())
+        .filter(r => !r.fork)
+        .slice(0, 4);
+
+      if (repos.length === 0) throw new Error('No repositories found');
+
+      sessionStorage.setItem(CACHE_KEY, JSON.stringify(repos));
+      render(repos);
+    } catch {
+      statusEl.textContent = "Couldn't load live repositories right now.";
+      const link = document.createElement('a');
+      link.href = 'https://github.com/Lwaano';
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.className = 'btn-neon btn-ghost';
+      link.style.marginTop = '1rem';
+      link.innerHTML = '<i class="fa-brands fa-github"></i> View GitHub Profile';
+      statusEl.appendChild(document.createElement('br'));
+      statusEl.appendChild(link);
+    }
+  }
+
+  loadRepoFeed();
+
   /* ---------- Theme toggle ---------- */
   const themeToggle = document.getElementById('themeToggle');
   const themeIcon = themeToggle.querySelector('i');
@@ -112,12 +194,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   typeLoop();
 
-  /* ---------- Skill bar animation on scroll ---------- */
+  /* ---------- Skill ring animation on scroll ---------- */
+  const RING_CIRCUMFERENCE = 2 * Math.PI * 52;
+
   function animateSkills() {
-    document.querySelectorAll('.skill').forEach(skill => {
-      const level = skill.dataset.level;
-      const bar = skill.querySelector('.bar');
-      bar.style.width = `${level}%`;
+    document.querySelectorAll('.skill-card').forEach(card => {
+      const level = Number(card.dataset.level);
+      const ring = card.querySelector('.skill-ring-fill');
+      const percentLabel = card.querySelector('.skill-percent');
+
+      ring.style.strokeDashoffset = String(RING_CIRCUMFERENCE * (1 - level / 100));
+
+      const duration = 1400;
+      const start = performance.now();
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        percentLabel.textContent = `${Math.round(level * progress)}%`;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
     });
   }
 
@@ -128,12 +223,12 @@ document.addEventListener('DOMContentLoaded', () => {
         skillsObserver.disconnect();
       }
     });
-  }, { threshold: 0.4 });
-  const skillsBars = document.querySelector('.skills-bars');
-  if (skillsBars) skillsObserver.observe(skillsBars);
+  }, { threshold: 0.3 });
+  const skillsGrid = document.querySelector('.skills-grid');
+  if (skillsGrid) skillsObserver.observe(skillsGrid);
 
   /* ---------- Reveal-on-scroll for cards & sections ---------- */
-  const revealTargets = document.querySelectorAll('.project-card, .about-text, .about-image, .github-card, .contact-container');
+  const revealTargets = document.querySelectorAll('.project-card, .about-text, .about-image, .now-panel, .contact-container');
   revealTargets.forEach(el => el.classList.add('reveal'));
 
   const revealObserver = new IntersectionObserver((entries) => {
@@ -202,9 +297,10 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Toast helper ---------- */
   const toastEl = document.getElementById('toast');
   let toastTimer;
-  function showToast(message) {
+  function showToast(message, type = 'default') {
     toastEl.textContent = message;
     toastEl.classList.add('show');
+    toastEl.classList.toggle('success', type === 'success');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3000);
   }
@@ -215,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
   copyEmailBtn.addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(EMAIL);
-      showToast('Email copied to clipboard ✔');
+      showToast('Email copied to clipboard ✔', 'success');
     } catch {
       showToast(`Email: ${EMAIL}`);
     }
@@ -270,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   if (new URLSearchParams(location.search).get('sent') === 'true') {
-    showToast("Message sent — I'll get back to you soon!");
+    showToast("Message sent — I'll get back to you soon!", 'success');
     document.getElementById('contact')?.scrollIntoView();
     history.replaceState(null, '', location.pathname + location.hash);
   }
@@ -308,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(216, 191, 160, 0.7)';
+      ctx.fillStyle = 'rgba(96, 165, 250, 0.7)';
       ctx.fill();
     });
 
@@ -321,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(169, 128, 90, ${1 - dist / 120})`;
+          ctx.strokeStyle = `rgba(37, 99, 235, ${1 - dist / 120})`;
           ctx.lineWidth = 0.6;
           ctx.stroke();
         }
@@ -444,7 +540,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let konamiProgress = 0;
 
   function launchConfetti() {
-    const colors = ['#A9805A', '#D8BFA0', '#6B4A34', '#E8D9C4', '#8C6A48'];
+    const colors = ['#2563EB', '#60A5FA', '#93C5FD', '#1D4ED8', '#4ADE80'];
     for (let i = 0; i < 120; i++) {
       const piece = document.createElement('div');
       const size = Math.random() * 8 + 4;
