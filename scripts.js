@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(107, 255, 247, 0.7)';
+      ctx.fillStyle = 'rgba(216, 191, 160, 0.7)';
       ctx.fill();
     });
 
@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(255, 63, 164, ${1 - dist / 120})`;
+          ctx.strokeStyle = `rgba(169, 128, 90, ${1 - dist / 120})`;
           ctx.lineWidth = 0.6;
           ctx.stroke();
         }
@@ -444,7 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let konamiProgress = 0;
 
   function launchConfetti() {
-    const colors = ['#6BFFF7', '#FF3FA4', '#D68FD6', '#FFD700', '#8D86C9'];
+    const colors = ['#A9805A', '#D8BFA0', '#6B4A34', '#E8D9C4', '#8C6A48'];
     for (let i = 0; i < 120; i++) {
       const piece = document.createElement('div');
       const size = Math.random() * 8 + 4;
