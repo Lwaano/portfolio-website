@@ -238,7 +238,11 @@
     <h2 class="section-title">Get in Touch</h2>
     <p class="section-subtitle">Have a project in mind or just want to say hi? My inbox is open.</p>
     <div class="contact-container glass-card">
-      <form class="contact-form" id="contactForm" novalidate>
+      <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+        <input type="hidden" name="access_key" value="04f1c70b-bb1b-41cf-bd03-9f24e872663c">
+        <input type="hidden" name="subject" value="New message from your portfolio site">
+        <input type="hidden" name="redirect" id="redirectField" value="">
+        <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off">
         <div class="form-group">
           <input type="text" name="name" id="name" placeholder="Your Name" required>
           <div class="underline"></div>
@@ -254,10 +258,10 @@
           <div class="underline"></div>
           <span class="field-error" id="messageError"></span>
         </div>
-        <button type="submit" class="btn-neon">
-          <i class="fa-solid fa-paper-plane"></i> Send Message
+        <button type="submit" class="btn-neon" id="contactSubmit">
+          <i class="fa-solid fa-paper-plane"></i> <span>Send Message</span>
         </button>
-        <p class="form-hint">Opens your email client with the message pre-filled.</p>
+        <p class="form-hint">Sends straight to my inbox — no email app required.</p>
       </form>
     </div>
     <div class="contact-content">

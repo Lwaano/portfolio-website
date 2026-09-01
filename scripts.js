@@ -221,18 +221,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  /* ---------- Contact form (mailto composer with validation) ---------- */
+  /* ---------- Contact form (delivered via Web3Forms, plain POST — no CORS/AJAX dependency) ---------- */
   const contactForm = document.getElementById('contactForm');
+  const contactSubmit = document.getElementById('contactSubmit');
   const nameInput = document.getElementById('name');
   const emailInput = document.getElementById('email');
   const messageInput = document.getElementById('message');
+  const redirectField = document.getElementById('redirectField');
+
+  redirectField.value = `${location.origin}${location.pathname}?sent=true#contact`;
 
   function setFieldError(input, errorId, message) {
     document.getElementById(errorId).textContent = message;
   }
 
   contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
     let valid = true;
 
     if (!nameInput.value.trim()) {
@@ -257,15 +260,20 @@ document.addEventListener('DOMContentLoaded', () => {
       setFieldError(messageInput, 'messageError', '');
     }
 
-    if (!valid) return;
+    if (!valid) {
+      e.preventDefault();
+      return;
+    }
 
-    const subject = encodeURIComponent(`Portfolio contact from ${nameInput.value.trim()}`);
-    const body = encodeURIComponent(
-      `${messageInput.value.trim()}\n\n— ${nameInput.value.trim()} (${emailInput.value.trim()})`
-    );
-    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
-    showToast('Opening your email client…');
+    contactSubmit.disabled = true;
+    contactSubmit.querySelector('span').textContent = 'Sending…';
   });
+
+  if (new URLSearchParams(location.search).get('sent') === 'true') {
+    showToast("Message sent — I'll get back to you soon!");
+    document.getElementById('contact')?.scrollIntoView();
+    history.replaceState(null, '', location.pathname + location.hash);
+  }
 
   /* ---------- Lightweight canvas particle background (no external lib) ---------- */
   const canvas = document.getElementById('particles-canvas');
