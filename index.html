@@ -3,55 +3,132 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lwaano Siakalima — Software Engineer & Web Developer. Portfolio of full-stack projects, technical skills, and ways to get in touch.">
+  <meta name="theme-color" content="#1a1a1a">
   <title>Lwaano Siakalima | Portfolio</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236BFFF7'/%3E%3Cstop offset='1' stop-color='%23FF3FA4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='%231a1a1a'/%3E%3Ctext x='50' y='68' font-size='52' font-family='Arial, sans-serif' font-weight='700' text-anchor='middle' fill='url(%23g)'%3ELS%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
   <header class="glass-nav">
     <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
+      <a href="#home" class="nav-logo">LS<span>.</span></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul id="navMenu">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#github" class="nav-link">GitHub</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
+      <div class="nav-actions">
+        <button class="icon-btn" id="paletteToggle" aria-label="Open command palette (Ctrl+K)" title="Quick actions (Ctrl+K)">
+          <i class="fa-solid fa-terminal"></i>
+        </button>
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle light/dark theme">
+          <i class="fa-solid fa-sun"></i>
+        </button>
+      </div>
     </nav>
   </header>
 
   <section id="home" class="hero">
-    <div id="particles-js"></div>
+    <canvas id="particles-canvas"></canvas>
     <div class="hero-content">
-      <h1 class="gradient-text">Lwaano Siakalima's Portfolio Website</h1>
-      <div class="title-container">
-        <p class="profession-titles">
-          <span class="title-item">Web Developer</span>
-          <span class="title-item">Software Engineer</span>
-          <span class="title-item">Creative Designer</span>
+      <p class="hero-eyebrow animate-fade-in">👋 Hi, my name is</p>
+      <h1 class="gradient-text animate-fade-in">Lwaano Siakalima</h1>
+      <div class="typewriter-wrap animate-fade-in">
+        <span id="typewriter" class="typewriter"></span><span class="typewriter-cursor">|</span>
+      </div>
+      <p class="hero-tagline animate-fade-in">
+        I build <span class="text-emerald">fast</span>, <span class="text-pink">reliable</span> software —
+        from full-stack web apps to the databases and networks behind them.
+      </p>
+      <div class="hero-cta animate-fade-in">
+        <a href="#projects" class="btn-neon">View My Work</a>
+        <a href="#contact" class="btn-neon btn-ghost">Get In Touch</a>
+      </div>
+    </div>
+    <a href="#about" class="scroll-indicator" aria-label="Scroll to About section">
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
+  </section>
+
+  <section id="about" class="about">
+    <h2 class="section-title">About Me</h2>
+    <div class="about-container">
+      <div class="about-image">
+        <img src="projects/image1.png" alt="Colorful 3D lettering welcome graphic for Lwaano Siakalima" loading="lazy">
+      </div>
+      <div class="about-text glass-card">
+        <p>
+          I'm a <span class="text-emerald">software engineer</span> and <span class="text-pink">web developer</span>
+          who enjoys turning ideas into working products — from full-stack web applications to database-driven
+          systems and the networks that keep them running smoothly. I care about
+          <span class="text-purple">clean code</span>, <span class="text-copper">thoughtful design</span>,
+          and shipping things that actually work.
         </p>
+        <p>
+          I'm always learning something new, whether that's a framework, a tool, or just a better way to
+          solve a problem. Take a look at what I've been building below.
+        </p>
+        <div class="about-highlights">
+          <span class="highlight-chip"><i class="fa-solid fa-code"></i> Web &amp; App Development</span>
+          <span class="highlight-chip"><i class="fa-solid fa-network-wired"></i> Network Administration</span>
+          <span class="highlight-chip"><i class="fa-solid fa-database"></i> Database Management</span>
+        </div>
+        <div class="about-actions">
+          <a href="https://github.com/Lwaano" class="btn-neon" target="_blank" rel="noopener">
+            <i class="fa-brands fa-github"></i> View GitHub
+          </a>
+          <button class="btn-neon btn-ghost" id="copyEmailBtn" type="button">
+            <i class="fa-solid fa-envelope"></i> Copy Email
+          </button>
+        </div>
       </div>
     </div>
   </section>
 
+  <section id="github" class="github-activity">
+    <h2 class="section-title">GitHub Activity</h2>
+    <p class="section-subtitle">Live stats, pulled straight from my GitHub profile.</p>
+    <div class="github-badges">
+      <img loading="lazy" src="https://img.shields.io/github/followers/Lwaano?label=Followers&style=for-the-badge&color=6BFFF7&labelColor=1a1a1a" alt="GitHub followers">
+      <img loading="lazy" src="https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/Lwaano&query=public_repos&label=Public%20Repos&style=for-the-badge&color=FF3FA4&labelColor=1a1a1a" alt="Public repositories">
+      <a href="https://github.com/Lwaano" target="_blank" rel="noopener">
+        <img loading="lazy" src="https://img.shields.io/badge/View%20Full%20Profile-GitHub-D68FD6?style=for-the-badge&logo=github&labelColor=1a1a1a" alt="View full GitHub profile">
+      </a>
+    </div>
+    <div class="github-grid">
+      <img class="github-card github-streak" loading="lazy" src="https://streak-stats.demolab.com/?user=Lwaano&theme=radical&background=00000000&hide_border=true&ring=FF3FA4&fire=6BFFF7&currStreakLabel=6BFFF7" alt="Lwaano Siakalima's GitHub contribution streak">
+    </div>
+  </section>
+
   <section id="skills" class="skills">
-    <h2>Technical Skills</h2>
+    <h2 class="section-title">Technical Skills</h2>
     <div class="skills-bars">
       <div class="skill" data-level="90">
-        <span>Web and Application Development</span>
+        <span><i class="fa-solid fa-code"></i> Web and Application Development</span>
         <div class="bar-container">
           <div class="bar"></div>
         </div>
       </div>
       <div class="skill" data-level="90">
-        <span>Network Administration</span>
+        <span><i class="fa-solid fa-network-wired"></i> Network Administration</span>
         <div class="bar-container">
           <div class="bar"></div>
         </div>
       </div>
       <div class="skill" data-level="90">
-        <span>Database Management</span>
+        <span><i class="fa-solid fa-database"></i> Database Management</span>
         <div class="bar-container">
           <div class="bar"></div>
         </div>
@@ -61,28 +138,40 @@
 
   <section id="projects" class="projects">
     <h2 class="section-title">Featured Projects</h2>
-    <div class="projects-grid">
-      <!-- Weather Dashboard -->
-      <div class="glass-card project-card">
+    <div class="filter-buttons" id="filterButtons">
+      <button class="filter-chip active" data-filter="all">All</button>
+    </div>
+    <div class="projects-grid" id="projectsGrid">
+      <!-- Church Registration System -->
+      <div class="glass-card project-card" data-tags="JavaScript,React,Node.js">
+        <span class="project-badge">Actively Building</span>
         <div class="project-content">
-          <h3>Weather Dashboard</h3>
+          <div class="project-icon"><i class="fa-solid fa-church"></i></div>
+          <h3>Church Registration System</h3>
           <div class="project-tags">
             <span class="tag">JavaScript</span>
-            <span class="tag">API</span>
-            <span class="tag">Bootstrap</span>
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
           </div>
           <p class="project-description">
-            Interactive weather forecasting web application with real-time data from OpenWeather API and search history features.
+            A member registration and management system for churches, built to keep track of membership records,
+            attendance, and events in one place.
           </p>
           <div class="project-links">
-            <a href="https://github.com/Lwaano/weather_dashboard" class="btn-neon" target="_blank">View Code</a>
+            <a href="http://envoysofchristloveministryinternational.org/" class="btn-neon" target="_blank" rel="noopener">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
+            </a>
+            <a href="https://github.com/Lwaano/Church-registration-system" class="btn-neon btn-ghost" target="_blank" rel="noopener">
+              <i class="fa-brands fa-github"></i> View Code
+            </a>
           </div>
         </div>
       </div>
-  
+
       <!-- CNMAT Admin System -->
-      <div class="glass-card project-card">
+      <div class="glass-card project-card" data-tags="React,Node.js,MongoDB">
         <div class="project-content">
+          <div class="project-icon"><i class="fa-solid fa-heart-pulse"></i></div>
           <h3>CNMAT Admin System</h3>
           <div class="project-tags">
             <span class="tag">React</span>
@@ -93,14 +182,17 @@
             Comprehensive administration dashboard with user management, analytics, and system configuration capabilities.
           </p>
           <div class="project-links">
-            <a href="https://github.com/Lwaano/CNMAT-Admin" class="btn-neon" target="_blank">View Code</a>
+            <a href="https://github.com/Lwaano/CNMAT-Admin" class="btn-neon" target="_blank" rel="noopener">
+              <i class="fa-brands fa-github"></i> View Code
+            </a>
           </div>
         </div>
       </div>
-  
+
       <!-- Accommodation System -->
-      <div class="glass-card project-card">
+      <div class="glass-card project-card" data-tags="Python,Django,PostgreSQL">
         <div class="project-content">
+          <div class="project-icon"><i class="fa-solid fa-hotel"></i></div>
           <h3>Accommodation System</h3>
           <div class="project-tags">
             <span class="tag">Python</span>
@@ -111,14 +203,17 @@
             Full-stack accommodation management system with booking features, payment integration, and inventory management.
           </p>
           <div class="project-links">
-            <a href="https://github.com/Lwaano/accommodation_system" class="btn-neon" target="_blank">View Code</a>
+            <a href="https://github.com/Lwaano/accommodation_system" class="btn-neon" target="_blank" rel="noopener">
+              <i class="fa-brands fa-github"></i> View Code
+            </a>
           </div>
         </div>
       </div>
-  
+
       <!-- CSV Processor -->
-      <div class="glass-card project-card">
+      <div class="glass-card project-card" data-tags="Python,Pandas,Data Analysis">
         <div class="project-content">
+          <div class="project-icon"><i class="fa-solid fa-file-csv"></i></div>
           <h3>CSV Data Processor</h3>
           <div class="project-tags">
             <span class="tag">Python</span>
@@ -129,77 +224,79 @@
             Advanced CSV data processing tool with cleaning, transformation, and visualization capabilities for large datasets.
           </p>
           <div class="project-links">
-            <a href="https://github.com/Lwaano/csv-project" class="btn-neon" target="_blank">View Code</a>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Starter Project Template -->
-      <div class="glass-card project-card">
-        <div class="project-content">
-          <h3>Project Starter Template</h3>
-          <div class="project-tags">
-            <span class="tag">Boilerplate</span>
-            <span class="tag">Webpack</span>
-            <span class="tag">CI/CD</span>
-          </div>
-          <p class="project-description">
-            Modern project scaffolding with pre-configured build tools, testing frameworks, and deployment pipelines.
-          </p>
-          <div class="project-links">
-            <a href="https://github.com/Lwaano/01-starting-project" class="btn-neon" target="_blank">View Code</a>
+            <a href="https://github.com/Lwaano/csv-project" class="btn-neon" target="_blank" rel="noopener">
+              <i class="fa-brands fa-github"></i> View Code
+            </a>
           </div>
         </div>
       </div>
     </div>
+    <p class="no-results" id="noResults" hidden>No projects match that filter.</p>
   </section>
-  
+
   <section id="contact" class="contact">
     <h2 class="section-title">Get in Touch</h2>
+    <p class="section-subtitle">Have a project in mind or just want to say hi? My inbox is open.</p>
     <div class="contact-container glass-card">
-      <form class="contact-form">
+      <form class="contact-form" id="contactForm" novalidate>
         <div class="form-group">
-          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="text" name="name" id="name" placeholder="Your Name" required>
           <div class="underline"></div>
+          <span class="field-error" id="nameError"></span>
         </div>
         <div class="form-group">
-          <input type="email" name="email" placeholder="Your Email" required>
+          <input type="email" name="email" id="email" placeholder="Your Email" required>
           <div class="underline"></div>
+          <span class="field-error" id="emailError"></span>
         </div>
         <div class="form-group">
-          <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+          <textarea name="message" id="message" placeholder="Your Message" rows="5" required></textarea>
           <div class="underline"></div>
+          <span class="field-error" id="messageError"></span>
         </div>
-        <button type="submit" class="btn-neon">Send Message</button>
+        <button type="submit" class="btn-neon">
+          <i class="fa-solid fa-paper-plane"></i> Send Message
+        </button>
+        <p class="form-hint">Opens your email client with the message pre-filled.</p>
       </form>
     </div>
     <div class="contact-content">
-      <p>Email: Siakalimalwaano@gmail.com</p>
+      <p>Email: siakalimalwaano@gmail.com</p>
       <div class="social-links">
-        <a href="https://github.com/Lwaano" target="_blank">GitHub</a>
-        <a href="https://www.linkedin.com/in/lwaano-siakalima-917318225" target="_blank">LinkedIn</a>
+        <a href="https://github.com/Lwaano" class="social-icon" target="_blank" rel="noopener" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/lwaano-siakalima-917318225" class="social-icon" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://twitter.com/LwaanoS" class="social-icon" target="_blank" rel="noopener" aria-label="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
       </div>
     </div>
   </section>
-  
-  <div class="social-links">
-    <a href="https://github.com/Lwaano" class="social-icon" target="_blank">
-      <i class="fab fa-github"></i>
-    </a>
-    <a href="https://www.linkedin.com/in/lwaano-siakalima-917318225" class="social-icon" target="_blank">
-      <i class="fab fa-linkedin"></i>
-    </a>
-    <a href="https://twitter.com/LwaanoS" class="social-icon" target="_blank">
-      <i class="fab fa-twitter"></i>
-    </a>
-  </div>
-  
-  <div class="loader" style="display: none;"></div>
-  
+
   <footer>
-    <p>&copy; 2025 Lwaano Siakalima. All rights reserved.</p>
+    <p>&copy; <span id="year"></span> <span class="text-emerald">Lwaano</span> <span class="text-pink">Siakalima</span>. All rights reserved.</p>
   </footer>
-  
-  <script src="script.js"></script>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="command-palette" id="commandPalette" hidden>
+    <div class="command-palette-backdrop" id="paletteBackdrop"></div>
+    <div class="command-palette-box" role="dialog" aria-label="Command palette">
+      <div class="command-palette-input">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="paletteInput" placeholder="Type a command or search…" autocomplete="off">
+      </div>
+      <ul id="paletteResults"></ul>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
 </body>
 </html>
