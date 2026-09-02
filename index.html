@@ -240,11 +240,6 @@
           <p class="project-description">
             Comprehensive administration dashboard with user management, analytics, and system configuration capabilities.
           </p>
-          <div class="project-links">
-            <a href="https://github.com/Lwaano/CNMAT-Admin" class="btn-neon" target="_blank" rel="noopener">
-              <i class="fa-brands fa-github"></i> View Code
-            </a>
-          </div>
         </div>
       </div>
 
@@ -261,11 +256,6 @@
           <p class="project-description">
             Full-stack accommodation management system with booking features, payment integration, and inventory management.
           </p>
-          <div class="project-links">
-            <a href="https://github.com/Lwaano/accommodation_system" class="btn-neon" target="_blank" rel="noopener">
-              <i class="fa-brands fa-github"></i> View Code
-            </a>
-          </div>
         </div>
       </div>
 
@@ -282,11 +272,6 @@
           <p class="project-description">
             Advanced CSV data processing tool with cleaning, transformation, and visualization capabilities for large datasets.
           </p>
-          <div class="project-links">
-            <a href="https://github.com/Lwaano/csv-project" class="btn-neon" target="_blank" rel="noopener">
-              <i class="fa-brands fa-github"></i> View Code
-            </a>
-          </div>
         </div>
       </div>
     </div>
@@ -357,6 +342,21 @@
         <input type="text" id="paletteInput" placeholder="Type a command or search…" autocomplete="off">
       </div>
       <ul id="paletteResults"></ul>
+    </div>
+  </div>
+
+  <div class="project-modal" id="projectModal" hidden>
+    <div class="project-modal-backdrop" id="projectModalBackdrop"></div>
+    <div class="project-modal-box" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+      <button class="project-modal-close" id="projectModalClose" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="project-modal-icon" id="projectModalIcon"></div>
+      <h3 id="projectModalTitle"></h3>
+      <div class="project-tags" id="projectModalTags"></div>
+      <p class="project-modal-desc" id="projectModalDesc"></p>
+      <div class="project-modal-stats" id="projectModalStats" hidden></div>
+      <div class="project-links" id="projectModalLinks"></div>
     </div>
   </div>
 

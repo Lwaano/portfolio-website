@@ -294,6 +294,95 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* ---------- Live per-project GitHub stats (only shown when the repo actually resolves) ---------- */
+  function getRepoPath(card) {
+    const link = card.querySelector('a[href*="github.com/"]');
+    if (!link) return null;
+    const match = new URL(link.href).pathname.match(/^\/([^/]+)\/([^/]+)\/?$/);
+    return match ? `${match[1]}/${match[2]}` : null;
+  }
+
+  async function loadCardStats(card) {
+    const repoPath = getRepoPath(card);
+    if (!repoPath) return;
+
+    const cacheKey = `gh_repo_stat_${repoPath}`;
+    try {
+      let data = sessionStorage.getItem(cacheKey);
+      if (data) {
+        data = JSON.parse(data);
+      } else {
+        const res = await fetch(`https://api.github.com/repos/${repoPath}`);
+        if (!res.ok) return;
+        const repo = await res.json();
+        data = { stars: repo.stargazers_count, updated: repo.pushed_at };
+        sessionStorage.setItem(cacheKey, JSON.stringify(data));
+      }
+
+      const statsEl = document.createElement('div');
+      statsEl.className = 'project-stats';
+      statsEl.innerHTML = `
+        <span><i class="fa-solid fa-star"></i>${data.stars} stars</span>
+        <span><i class="fa-solid fa-clock"></i>Updated ${new Date(data.updated).toLocaleDateString(undefined, { month: 'short', year: 'numeric' })}</span>
+      `;
+      card.querySelector('.project-description').insertAdjacentElement('afterend', statsEl);
+    } catch {
+      // Silently skip — a card with no verifiable live data just shows its static content.
+    }
+  }
+
+  projectCards.forEach(loadCardStats);
+
+  /* ---------- Project detail modal ---------- */
+  const projectModal = document.getElementById('projectModal');
+  const projectModalBackdrop = document.getElementById('projectModalBackdrop');
+  const projectModalClose = document.getElementById('projectModalClose');
+
+  function openProjectModal(card) {
+    document.getElementById('projectModalIcon').innerHTML = card.querySelector('.project-icon').innerHTML;
+    document.getElementById('projectModalTitle').textContent = card.querySelector('h3').textContent;
+    document.getElementById('projectModalTags').innerHTML = card.querySelector('.project-tags').innerHTML;
+    document.getElementById('projectModalDesc').textContent = card.querySelector('.project-description').textContent.trim();
+
+    const statsSource = card.querySelector('.project-stats');
+    const statsTarget = document.getElementById('projectModalStats');
+    statsTarget.hidden = !statsSource;
+    statsTarget.innerHTML = statsSource ? statsSource.innerHTML : '';
+
+    const linksSource = card.querySelector('.project-links');
+    document.getElementById('projectModalLinks').innerHTML = linksSource ? linksSource.innerHTML : '';
+
+    projectModal.hidden = false;
+    projectModalClose.focus();
+  }
+
+  function closeProjectModal() {
+    projectModal.hidden = true;
+  }
+
+  projectCards.forEach(card => {
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `View details for ${card.querySelector('h3').textContent}`);
+
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('a')) return;
+      openProjectModal(card);
+    });
+    card.addEventListener('keydown', (e) => {
+      if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('a')) {
+        e.preventDefault();
+        openProjectModal(card);
+      }
+    });
+  });
+
+  projectModalBackdrop.addEventListener('click', closeProjectModal);
+  projectModalClose.addEventListener('click', closeProjectModal);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !projectModal.hidden) closeProjectModal();
+  });
+
   /* ---------- Toast helper ---------- */
   const toastEl = document.getElementById('toast');
   let toastTimer;
