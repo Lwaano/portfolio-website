@@ -371,7 +371,8 @@ nav a.nav-link.active {
   transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 
-.highlight-chip:hover {
+.highlight-chip:hover,
+.highlight-chip:active {
   background: var(--primary);
   color: #fff;
   transform: translateY(-3px) scale(1.05);
@@ -590,7 +591,8 @@ nav a.nav-link.active {
   transition: stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.skill-card:hover .skill-ring-fill {
+.skill-card:hover .skill-ring-fill,
+.skill-card:active .skill-ring-fill {
   stroke: var(--success);
 }
 
@@ -610,7 +612,8 @@ nav a.nav-link.active {
   transition: color 0.25s ease;
 }
 
-.skill-card:hover .skill-ring-content i {
+.skill-card:hover .skill-ring-content i,
+.skill-card:active .skill-ring-content i {
   color: var(--success);
 }
 
@@ -753,6 +756,15 @@ nav a.nav-link.active {
 .project-card:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 3px;
+}
+
+/* Touch devices can't hover, so surface the tap affordance up front instead of on discovery */
+@media (hover: none) {
+  .project-card::after {
+    opacity: 1;
+    transform: translateY(0);
+    bottom: 12px;
+  }
 }
 
 .project-card::before {
@@ -1285,6 +1297,31 @@ footer {
 
   .social-links {
     gap: 1rem;
+  }
+
+  /* Larger touch targets on small screens (44px is the standard minimum tap-target size) */
+  .icon-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .social-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .filter-chip {
+    padding: 0.6rem 1.2rem;
+  }
+
+  .back-to-top {
+    width: 48px;
+    height: 48px;
+  }
+
+  .project-modal-close {
+    width: 40px;
+    height: 40px;
   }
 }
 
