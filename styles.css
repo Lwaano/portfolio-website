@@ -329,7 +329,12 @@ nav a.nav-link.active {
   border-radius: 20px;
   overflow: hidden;
   border: 1px solid var(--border-color);
-  animation: float 4s ease-in-out infinite;
+  transition: transform 0.15s ease-out, box-shadow 0.25s ease;
+  will-change: transform;
+}
+
+.about-image:hover {
+  box-shadow: 0 20px 45px var(--shadow-color);
 }
 
 .about-image img {
@@ -363,6 +368,42 @@ nav a.nav-link.active {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.highlight-chip:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-3px) scale(1.05);
+}
+
+.about-stats {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.about-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-stat-num {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.about-stat-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .about-actions {

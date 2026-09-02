@@ -279,19 +279,73 @@ document.addEventListener('DOMContentLoaded', () => {
     noResults.hidden = visibleCount !== 0;
   });
 
-  /* ---------- 3D tilt hover on project cards ---------- */
-  projectCards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
+  /* ---------- 3D tilt hover (project cards + about photo) ---------- */
+  function applyTilt(el, { maxTilt = 8, lift = -4 } = {}) {
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      const rotateX = ((y / rect.height) - 0.5) * -8;
-      const rotateY = ((x / rect.width) - 0.5) * 8;
-      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+      const rotateX = ((y / rect.height) - 0.5) * -maxTilt;
+      const rotateY = ((x / rect.width) - 0.5) * maxTilt;
+      el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(${lift}px)`;
     });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = '';
     });
+  }
+
+  projectCards.forEach(card => applyTilt(card));
+
+  const aboutImage = document.querySelector('.about-image');
+  if (aboutImage) applyTilt(aboutImage, { maxTilt: 10, lift: 0 });
+
+  /* ---------- About stats (live GitHub repo count + computed page counts) ---------- */
+  async function loadAboutStats() {
+    const reposEl = document.getElementById('statRepos');
+    const projectsEl = document.getElementById('statProjects');
+    const skillsEl = document.getElementById('statSkills');
+
+    projectsEl.dataset.target = document.querySelectorAll('.project-card').length;
+    skillsEl.dataset.target = document.querySelectorAll('.skill-card').length;
+
+    try {
+      const cacheKey = 'gh_user_public_repos';
+      let count = sessionStorage.getItem(cacheKey);
+      if (!count) {
+        const res = await fetch('https://api.github.com/users/Lwaano');
+        if (!res.ok) throw new Error('GitHub user lookup failed');
+        count = (await res.json()).public_repos;
+        sessionStorage.setItem(cacheKey, String(count));
+      }
+      reposEl.dataset.target = count;
+    } catch {
+      reposEl.closest('.about-stat').hidden = true;
+    }
+  }
+
+  function animateCountUp(el, duration = 1400) {
+    const target = Number(el.dataset.target);
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      el.textContent = Math.round(target * progress);
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  loadAboutStats().then(() => {
+    const statsEl = document.querySelector('.about-stats');
+    if (!statsEl) return;
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          statsEl.querySelectorAll('.about-stat-num').forEach(el => animateCountUp(el));
+          statsObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+    statsObserver.observe(statsEl);
   });
 
   /* ---------- Live per-project GitHub stats (only shown when the repo actually resolves) ---------- */
